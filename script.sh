@@ -9,20 +9,20 @@ set -e
 # Here is a list of tasks for you.
 
 # 0. Tell me who worked on this together
-echo "student 1"   # please fill in names here
-echo "student 2"
+echo "Rhea Bhatia"   
+echo "Hui Yann Foo"
+echo "Ignacio Garijo Campos"
 
 # 1. Go to your home directory: 
-# (enter your command below)
-
+cd
 
 # 2. from your home, creating a directory structure: new folder `scpoprogramming`, and inside that folder create folder `hw1`
-# (enter your command below)
+mkdir -p ~/scpoprogramming
+mkdir -p ~/scpoprogramming/hw1
 
 
 # 3. go into that new directory, i.e. into ~/scpoprogramming/hw1
-# (enter your command below)
-
+cd ~/scpoprogramming/hw1
 
 # 4. download with wget if file does not exist yet
 # if wget does not work for you, manually download from the below URL and place into `~/scpoprogramming/hw1` as `movies.dat`
@@ -43,7 +43,7 @@ if [ ! -f  movies.dat ]; then
 fi
 
 # 5. look at first 4 rows of downloaded data in `movies.dat`
-# (enter your command below)
+head -n 4 movies.dat
 
 
 # actual analysis task: A pipeline
@@ -63,7 +63,7 @@ fi
 # then remove the # character from the start of the line and look at the result
 
 # awk -F '::' '{print $3}' _filename_
-
+awk -F '::' '{print $3}' movies.dat
 # 2. observe that the `{print $3}` part prints the third field. 
 # that looks like: genre1|genre2
 # that is, there is *another* separator in this column, `|`. 
@@ -73,21 +73,22 @@ fi
 # again, remove the # below, fill in for _filename_ and run
 
 # awk -F '::' '{print $3}' _filename_ | awk '{print split($0, a, "\\|")}'
-
+awk -F '::' '{print $3}' movies.dat | awk '{print split($0, a, "\\|")}'
 
 # 3. finish the pipeline by adding 2 commands, exactly like in class, that will produce a contingency table
 # we want to know how many movies belong to 0,1,2,... etc genres. 
 
 # awk -F '::' '{print $3}' _filename_ | awk '{print split($0, a, "\\|")}' | sort | uniq -c
-
+awk -F '::' '{print $3}' movies.dat | awk '{print split($0, a, "\\|")}' | sort | uniq -c
 # 4. redirect (>) the output of your pipeline to a file `outtable.txt` in the current directory
 # (enter your command below: just copy from 3. above and add the redirect)
-
+awk -F '::' '{print $3}' movies.dat | awk '{print split($0, a, "\\|")}' | sort | uniq -c > outtable.txt
 # 5. print your table to screen
 echo ""   # don't touch
 echo "here is my table:"   # don't touch
 
 # (enter your command below)
+cat outtable.txt
 
 
 #### End of your tasks
